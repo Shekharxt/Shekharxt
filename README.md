@@ -1,16 +1,58 @@
-## Hi there 👋
+# Hi, I'm Shekhar 👋
 
-<!--
-**Shekharxt/Shekharxt** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## Senior DevOps Engineer
 
-Here are some ideas to get you started:
+I specialize in designing, automating, and managing cloud infrastructure using Infrastructure as Code and modern DevOps practices.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
+
+## 🚀 Core Technologies
+
+- Microsoft Azure
+- Terraform
+- Azure DevOps
+- Docker
+- Kubernetes
+- Linux
+- Git & GitHub
+- Bash Scripting
+
+---
+
+## 📌 Currently Working On
+
+- Azure Landing Zone using Terraform
+- Production-ready Terraform Modules
+- Azure DevOps CI/CD Pipelines
+- Kubernetes Deployments on AKS
+- Infrastructure Automation
+
+---
+
+## 📂 Featured Projects
+
+- Azure Landing Zone
+- Azure VM Deployment using Terraform
+- Azure DevOps CI/CD Pipeline
+- AKS Production Deployment
+- Monitoring Stack (Prometheus & Grafana)
+
+---
+
+## 📖 Learning
+
+- Kubernetes
+- Helm
+- GitHub Actions
+- Azure Architecture
+- DevSecOps
+
+---
+
+## 📫 Connect With Me
+
+- LinkedIn: http://www.linkedin.com/in/shekharxt
+
+
+
+
