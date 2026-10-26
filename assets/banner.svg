@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 240" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e17" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="azure-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0078D4" />
+      <stop offset="50%" stop-color="#00b4d8" />
+      <stop offset="100%" stop-color="#48cae4" />
+    </linearGradient>
+
+    <linearGradient id="accent-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7928CA" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <linearGradient id="badge-border" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1e293b" stroke-width="0.8" stroke-opacity="0.6"/>
+    </pattern>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    .name-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', Roboto, Helvetica, sans-serif;
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: -0.5px;
+      fill: url(#text-grad);
+    }
+    .role-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      fill: #38bdf8;
+      letter-spacing: 0.5px;
+    }
+    .desc-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-weight: 400;
+      font-size: 13.5px;
+      fill: #94a3b8;
+      line-height: 1.5;
+    }
+    .badge-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-weight: 500;
+      font-size: 11.5px;
+      fill: #e2e8f0;
+    }
+    .metric-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      fill: #f8fafc;
+    }
+    .metric-sub {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      fill: #64748b;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="850" height="240" rx="16" fill="url(#bg-grad)" stroke="#1e293b" stroke-width="1.5" />
+  
+  <!-- Subtle Grid -->
+  <rect width="850" height="240" rx="16" fill="url(#grid)" />
+
+  <!-- Ambient Light / Ambient Glows -->
+  <circle cx="100" cy="50" r="90" fill="#0284c7" opacity="0.18" filter="url(#glow)" />
+  <circle cx="750" cy="180" r="110" fill="#6366f1" opacity="0.15" filter="url(#glow)" />
+  <circle cx="450" cy="30" r="70" fill="#0d9488" opacity="0.12" filter="url(#glow)" />
+
+  <!-- Top Accent Bar -->
+  <rect x="0" y="0" width="850" height="3.5" rx="1.5" fill="url(#azure-glow)" />
+
+  <!-- Content Layout Left Column -->
+  <g transform="translate(42, 38)">
+    <!-- Terminal-like status pill -->
+    <rect x="0" y="0" width="220" height="24" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1" />
+    <circle cx="12" cy="12" r="4.5" fill="#10b981" />
+    <text x="24" y="15.5" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">
+      STATUS: <tspan fill="#34d399">ACTIVE &amp; BUILDING</tspan>
+    </text>
+
+    <!-- Main Title -->
+    <text x="0" y="62" class="name-text">SHEKHAR</text>
+    
+    <!-- Subtitle / Role -->
+    <text x="0" y="88" class="role-text">DevOps &amp; Cloud Infrastructure Engineer</text>
+    
+    <!-- Experience & Philosophy -->
+    <text x="0" y="112" class="desc-text">3.5+ Years Experience • Architecting Resilient Azure Cloud Platforms,</text>
+    <text x="0" y="130" class="desc-text">Enterprise Landing Zones, Production DevSecOps &amp; IaC Automation.</text>
+
+    <!-- Tech Badges Pill Row -->
+    <g transform="translate(0, 146)">
+      <!-- Badge 1: Azure & CAF -->
+      <g transform="translate(0, 0)">
+        <rect width="130" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
+        <circle cx="14" cy="13" r="3.5" fill="#0078D4" />
+        <text x="25" y="16.5" class="badge-text">Azure CAF &amp; LZ</text>
+      </g>
+
+      <!-- Badge 2: Terraform -->
+      <g transform="translate(138, 0)">
+        <rect width="132" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
+        <circle cx="14" cy="13" r="3.5" fill="#844fba" />
+        <text x="25" y="16.5" class="badge-text">Terraform / IaC</text>
+      </g>
+
+      <!-- Badge 3: DevSecOps -->
+      <g transform="translate(278, 0)">
+        <rect width="136" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
+        <circle cx="14" cy="13" r="3.5" fill="#10b981" />
+        <text x="25" y="16.5" class="badge-text">DevSecOps &amp; CI/CD</text>
+      </g>
+
+      <!-- Badge 4: Kubernetes -->
+      <g transform="translate(422, 0)">
+        <rect width="118" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
+        <circle cx="14" cy="13" r="3.5" fill="#326ce5" />
+        <text x="25" y="16.5" class="badge-text">Kubernetes AKS</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right Highlight Stat Cards -->
+  <g transform="translate(630, 36)">
+    <!-- Metric Card 1 -->
+    <rect x="0" y="0" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
+    <text x="14" y="24" class="metric-title">3.5+ Years</text>
+    <text x="14" y="38" class="metric-sub">DevOps Engineering</text>
+
+    <!-- Metric Card 2 -->
+    <rect x="0" y="56" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
+    <text x="14" y="80" class="metric-title">100+ Workloads</text>
+    <text x="14" y="94" class="metric-sub">Migration &amp; Automation</text>
+
+    <!-- Metric Card 3 -->
+    <rect x="0" y="112" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
+    <text x="14" y="136" class="metric-title">Zero-Trust</text>
+    <text x="14" y="150" class="metric-sub">Security &amp; Governance</text>
+  </g>
+</svg>
