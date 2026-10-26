@@ -1,33 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 180" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 185" width="100%" height="100%">
   <defs>
     <!-- Refined Obsidian Background -->
     <linearGradient id="obsidian-bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#090d16" />
-      <stop offset="100%" stop-color="#05080e" />
+      <stop offset="60%" stop-color="#0b111e" />
+      <stop offset="100%" stop-color="#05070d" />
     </linearGradient>
 
-    <!-- Subtle Slate Hairline Border -->
-    <linearGradient id="hairline-border" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#1e293b" />
-      <stop offset="50%" stop-color="#334155" />
-      <stop offset="100%" stop-color="#1e293b" />
+    <!-- Subtle Static Base Border -->
+    <rect id="card-shape" width="848" height="183" rx="12" />
+
+    <!-- Animated Border Beam Gradient -->
+    <linearGradient id="beam-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="1" />
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0" />
     </linearGradient>
 
-    <!-- Subtle Soft Ambient Accent -->
-    <radialGradient id="soft-glow" cx="80%" cy="20%" r="60%">
-      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    <!-- Glow for Border Beam -->
+    <filter id="beam-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Typing Mask for CLI Command -->
+    <clipPath id="cli-clip">
+      <rect x="0" y="0" width="0" height="24">
+        <animate 
+          attributeName="width" 
+          values="0; 0; 455; 455; 0" 
+          keyTimes="0; 0.05; 0.35; 0.90; 1" 
+          dur="10s" 
+          repeatCount="indefinite" />
+      </rect>
+    </clipPath>
+
+    <!-- Soft Radial Ambient Lighting -->
+    <radialGradient id="soft-glow" cx="75%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#0078d4" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#0078d4" stop-opacity="0" />
     </radialGradient>
   </defs>
 
   <style>
-    @keyframes blink {
+    @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
-    }
-    .cursor {
-      animation: blink 1.2s infinite;
-      fill: #38bdf8;
     }
     .main-title {
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', 'Segoe UI', sans-serif;
@@ -46,16 +67,6 @@
     .cli-text {
       font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
       font-size: 12.5px;
-      fill: #cbd5e1;
-    }
-    .cli-dim {
-      fill: #64748b;
-    }
-    .cli-cyan {
-      fill: #38bdf8;
-    }
-    .cli-green {
-      fill: #34d399;
     }
     .tag-text {
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
@@ -65,84 +76,117 @@
     }
   </style>
 
-  <!-- Chassis Card -->
-  <rect width="850" height="180" rx="12" fill="url(#obsidian-bg)" stroke="url(#hairline-border)" stroke-width="1" />
-  
-  <!-- Gentle Ambient Azure Lighting -->
-  <rect width="850" height="180" rx="12" fill="url(#soft-glow)" />
+  <!-- Base Card -->
+  <rect x="1" y="1" width="848" height="183" rx="12" fill="url(#obsidian-bg)" stroke="#1e293b" stroke-width="1" />
+  <rect x="1" y="1" width="848" height="183" rx="12" fill="url(#soft-glow)" />
+
+  <!-- Animated Linear-Style Border Beam (Glides smoothly along card perimeter) -->
+  <rect x="1" y="1" width="848" height="183" rx="12" fill="none" stroke="url(#beam-grad)" stroke-width="2" stroke-dasharray="160 1900" filter="url(#beam-glow)">
+    <animate attributeName="stroke-dashoffset" from="0" to="-2060" dur="7s" repeatCount="indefinite" />
+  </rect>
 
   <!-- macOS / Terminal Header Bar -->
   <g transform="translate(24, 20)">
-    <!-- Window Dots (Muted, Elegant) -->
-    <circle cx="0" cy="0" r="4.5" fill="#ef4444" fill-opacity="0.8" />
-    <circle cx="14" cy="0" r="4.5" fill="#f59e0b" fill-opacity="0.8" />
-    <circle cx="28" cy="0" r="4.5" fill="#10b981" fill-opacity="0.8" />
+    <!-- Window Dots -->
+    <circle cx="0" cy="0" r="4.5" fill="#ef4444" fill-opacity="0.85" />
+    <circle cx="14" cy="0" r="4.5" fill="#f59e0b" fill-opacity="0.85" />
+    <circle cx="28" cy="0" r="4.5" fill="#10b981" fill-opacity="0.85" />
     
-    <!-- Environment breadcrumb -->
-    <text x="50" y="3.5" font-family="'SF Mono', monospace" font-size="11" fill="#475569" font-weight="500">
+    <!-- Breadcrumb -->
+    <text x="50" y="3.5" font-family="'SF Mono', monospace" font-size="11" fill="#64748b" font-weight="500">
       shekhar@azure-cloud: ~ / enterprise-landing-zone
     </text>
 
-    <!-- Top Right Status Pill -->
-    <g transform="translate(640, -8)">
-      <rect width="162" height="22" rx="11" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
-      <circle cx="11" cy="11" r="3.5" fill="#10b981" />
-      <text x="21" y="14.5" font-family="-apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#cbd5e1">
-        3.5+ YRS DEVOPS EXP
+    <!-- Top Right Status Pill with Animated Radar Ping -->
+    <g transform="translate(638, -8)">
+      <rect width="164" height="22" rx="11" fill="#0b1329" stroke="#1e3a5f" stroke-width="1" />
+      
+      <!-- Pulsing Green Radar Ping -->
+      <circle cx="12" cy="11" r="3.5" fill="#10b981" />
+      <circle cx="12" cy="11" r="3.5" fill="none" stroke="#10b981" stroke-width="1.2">
+        <animate attributeName="r" values="3.5;8" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.9;0" dur="2s" repeatCount="indefinite" />
+      </circle>
+
+      <text x="24" y="14.5" font-family="-apple-system, sans-serif" font-size="10" font-weight="600" fill="#94a3b8">
+        STATUS: <tspan fill="#34d399">PRODUCTION ACTIVE</tspan>
       </text>
     </g>
   </g>
 
-  <!-- Divider Line -->
-  <line x1="24" y1="36" x2="826" y2="36" stroke="#1e293b" stroke-width="0.75" />
+  <!-- Hairline Divider -->
+  <line x1="24" y1="36" x2="826" y2="36" stroke="#1e293b" stroke-width="0.8" />
 
   <!-- Main Content Body -->
-  <g transform="translate(26, 70)">
-    <!-- Identity -->
+  <g transform="translate(26, 72)">
+    <!-- Identity Line -->
     <text x="0" y="0" class="main-title">Shekhar</text>
     <text x="132" y="-1" class="role-title">— Cloud Infrastructure &amp; DevSecOps Engineer</text>
 
-    <!-- Terminal Execution Line -->
-    <g transform="translate(0, 32)">
-      <text x="0" y="0" class="cli-text">
-        <tspan class="cli-green">➜</tspan> <tspan class="cli-cyan">cloud</tspan> <tspan class="cli-dim">git:(</tspan><tspan fill="#f43f5e">main</tspan><tspan class="cli-dim">)</tspan> <tspan fill="#e2e8f0">terraform apply</tspan> <tspan class="cli-dim">-target=module.enterprise_landing_zone</tspan>
-      </text>
-      <rect x="585" y="-11" width="7" height="14" class="cursor" />
+    <!-- Interactive Terminal Command (Animated Typing) -->
+    <g transform="translate(0, 31)">
+      <!-- Animated Revealed Command -->
+      <g clip-path="url(#cli-clip)">
+        <text x="0" y="0" class="cli-text">
+          <tspan fill="#34d399">➜</tspan> <tspan fill="#38bdf8">cloud</tspan> <tspan fill="#64748b">git:(</tspan><tspan fill="#f43f5e">main</tspan><tspan fill="#64748b">)</tspan> <tspan fill="#e2e8f0">terraform apply</tspan> <tspan fill="#94a3b8">-target=module.enterprise_landing_zone</tspan>
+        </text>
+      </g>
+
+      <!-- Smooth Cursor Tracking the Typing Effect -->
+      <rect x="0" y="-11" width="7" height="14" fill="#38bdf8">
+        <animate 
+          attributeName="x" 
+          values="0; 0; 458; 458; 0" 
+          keyTimes="0; 0.05; 0.35; 0.90; 1" 
+          dur="10s" 
+          repeatCount="indefinite" />
+        <animate 
+          attributeName="opacity" 
+          values="1; 0; 1; 0; 1" 
+          dur="1s" 
+          repeatCount="indefinite" />
+      </rect>
     </g>
 
-    <!-- Output summary line -->
+    <!-- Terminal Execution Outputs (Smooth Fade In After Apply) -->
     <g transform="translate(0, 52)">
       <text x="0" y="0" class="cli-text" font-size="11.5">
-        <tspan class="cli-dim">Plan: 100+ workloads migrated, 0 to destroy. Status:</tspan> <tspan class="cli-green">✓ Infrastructure Healthy &amp; Governed</tspan>
+        <animate 
+          attributeName="opacity" 
+          values="0; 0; 1; 1; 0" 
+          keyTimes="0; 0.38; 0.44; 0.90; 1" 
+          dur="10s" 
+          repeatCount="indefinite" />
+        <tspan fill="#34d399">✓ Apply complete!</tspan> <tspan fill="#64748b">Resources: 100+ workloads migrated, 0 to destroy •</tspan> <tspan fill="#38bdf8">Drift: Zero</tspan>
       </text>
     </g>
 
-    <!-- Minimalist Badges Row -->
-    <g transform="translate(0, 72)">
-      <!-- Tag 1 -->
+    <!-- Refined Minimalist Badges (OpenTofu removed, purely Terraform) -->
+    <g transform="translate(0, 74)">
+      <!-- Badge 1 -->
       <g transform="translate(0, 0)">
-        <rect width="128" height="20" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="0.8" />
-        <text x="9" y="14" class="tag-text">Azure CAF &amp; Hub-Spoke</text>
+        <rect width="138" height="21" rx="4" fill="#0d1424" stroke="#1e2d4a" stroke-width="0.8" />
+        <text x="10" y="14.5" class="tag-text">Azure CAF &amp; Hub-Spoke</text>
       </g>
-      <!-- Tag 2 -->
-      <g transform="translate(136, 0)">
-        <rect width="112" height="20" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="0.8" />
-        <text x="9" y="14" class="tag-text">Terraform / OpenTofu</text>
+      <!-- Badge 2: Purely Terraform -->
+      <g transform="translate(146, 0)">
+        <rect width="115" height="21" rx="4" fill="#0d1424" stroke="#1e2d4a" stroke-width="0.8" />
+        <text x="10" y="14.5" class="tag-text">Terraform (IaC)</text>
       </g>
-      <!-- Tag 3 -->
-      <g transform="translate(256, 0)">
-        <rect width="122" height="20" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="0.8" />
-        <text x="9" y="14" class="tag-text">DevSecOps &amp; CI/CD</text>
+      <!-- Badge 3 -->
+      <g transform="translate(269, 0)">
+        <rect width="128" height="21" rx="4" fill="#0d1424" stroke="#1e2d4a" stroke-width="0.8" />
+        <text x="10" y="14.5" class="tag-text">DevSecOps &amp; CI/CD</text>
       </g>
-      <!-- Tag 4 -->
-      <g transform="translate(386, 0)">
-        <rect width="98" height="20" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="0.8" />
-        <text x="9" y="14" class="tag-text">Kubernetes AKS</text>
+      <!-- Badge 4 -->
+      <g transform="translate(405, 0)">
+        <rect width="105" height="21" rx="4" fill="#0d1424" stroke="#1e2d4a" stroke-width="0.8" />
+        <text x="10" y="14.5" class="tag-text">Kubernetes AKS</text>
       </g>
-      <!-- Tag 5 -->
-      <g transform="translate(492, 0)">
-        <rect width="126" height="20" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="0.8" />
-        <text x="9" y="14" class="tag-text">FinOps &amp; Observability</text>
+      <!-- Badge 5 -->
+      <g transform="translate(518, 0)">
+        <rect width="135" height="21" rx="4" fill="#0d1424" stroke="#1e2d4a" stroke-width="0.8" />
+        <text x="10" y="14.5" class="tag-text">FinOps &amp; Observability</text>
       </g>
     </g>
   </g>
