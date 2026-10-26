@@ -1,171 +1,332 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 240" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 250" width="100%" height="100%">
   <defs>
     <!-- Background Gradients -->
     <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0e17" />
-      <stop offset="50%" stop-color="#0f172a" />
-      <stop offset="100%" stop-color="#020617" />
+      <stop offset="0%" stop-color="#05070e" />
+      <stop offset="45%" stop-color="#0a0f1d" />
+      <stop offset="85%" stop-color="#04060c" />
+      <stop offset="100%" stop-color="#020307" />
     </linearGradient>
 
-    <!-- Glowing Accent Gradients -->
-    <linearGradient id="azure-glow" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0078D4" />
-      <stop offset="50%" stop-color="#00b4d8" />
-      <stop offset="100%" stop-color="#48cae4" />
+    <!-- Animated Neon Border Gradient -->
+    <linearGradient id="cyber-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe">
+        <animate attributeName="stop-color" values="#00f2fe;#38bdf8;#818cf8;#c084fc;#00f2fe" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="#0078d4">
+        <animate attributeName="stop-color" values="#0078d4;#6366f1;#ec4899;#0078d4" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#a855f7">
+        <animate attributeName="stop-color" values="#a855f7;#06b6d4;#3b82f6;#a855f7" dur="8s" repeatCount="indefinite" />
+      </stop>
     </linearGradient>
 
-    <linearGradient id="accent-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7928CA" />
-      <stop offset="100%" stop-color="#4F46E5" />
-    </linearGradient>
-
-    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <!-- Animated Shimmer Gradient for Name -->
+    <linearGradient id="name-shimmer" x1="0%" y1="0%" x2="200%" y2="0%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="60%" stop-color="#f8fafc" />
-      <stop offset="100%" stop-color="#38bdf8" />
+      <stop offset="30%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="70%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#ffffff" />
+      <animateTransform 
+        attributeName="gradientTransform" 
+        type="translate" 
+        from="-100,0" to="100,0" 
+        dur="4.5s" 
+        repeatCount="indefinite" />
     </linearGradient>
 
-    <linearGradient id="badge-border" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0.3" />
+    <!-- Laser Scan Gradient -->
+    <linearGradient id="laser-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
     </linearGradient>
 
-    <!-- Grid Pattern -->
-    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1e293b" stroke-width="0.8" stroke-opacity="0.6"/>
+    <!-- Cyber Matrix Grid -->
+    <pattern id="cyber-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#162032" stroke-width="0.8" stroke-opacity="0.7"/>
+      <circle cx="28" cy="28" r="0.75" fill="#38bdf8" opacity="0.3"/>
     </pattern>
 
     <!-- Glow Filter -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+    <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="deep-blur" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="35" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
   <style>
-    .name-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', Roboto, Helvetica, sans-serif;
-      font-weight: 800;
-      font-size: 38px;
-      letter-spacing: -0.5px;
-      fill: url(#text-grad);
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(1.15); }
+    }
+    @keyframes hud-flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+      70% { opacity: 0.95; }
+      85% { opacity: 0.6; }
+    }
+    @keyframes radar-scan {
+      0% { transform: translateY(0px); opacity: 0; }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(240px); opacity: 0; }
+    }
+    @keyframes float-badge {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-2px); }
+    }
+    @keyframes signal-ping {
+      0% { r: 4px; opacity: 1; }
+      100% { r: 12px; opacity: 0; }
+    }
+    @keyframes data-dash {
+      to { stroke-dashoffset: -40; }
+    }
+
+    .futuristic-name {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 900;
+      font-size: 42px;
+      letter-spacing: 1.5px;
+      fill: url(#name-shimmer);
+      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.45));
+    }
+    .hud-title {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      fill: #38bdf8;
+      text-transform: uppercase;
     }
     .role-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-weight: 600;
       font-size: 17px;
       fill: #38bdf8;
       letter-spacing: 0.5px;
     }
     .desc-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-weight: 400;
       font-size: 13.5px;
       fill: #94a3b8;
-      line-height: 1.5;
     }
     .badge-text {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
-      font-weight: 500;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 600;
       font-size: 11.5px;
       fill: #e2e8f0;
     }
-    .metric-title {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-weight: 700;
+    .metric-value {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 800;
       font-size: 18px;
       fill: #f8fafc;
+      letter-spacing: -0.2px;
     }
-    .metric-sub {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      fill: #64748b;
-      letter-spacing: 0.5px;
+    .metric-label {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-weight: 600;
+      font-size: 9.5px;
+      fill: #38bdf8;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
   </style>
 
-  <!-- Background Base -->
-  <rect width="850" height="240" rx="16" fill="url(#bg-grad)" stroke="#1e293b" stroke-width="1.5" />
+  <!-- Base Chassis -->
+  <rect width="850" height="250" rx="18" fill="url(#bg-grad)" />
+  <rect width="850" height="250" rx="18" fill="url(#cyber-grid)" />
+
+  <!-- Animated Ambient Nebula Lights -->
+  <circle cx="120" cy="50" r="100" fill="#0284c7" filter="url(#deep-blur)">
+    <animate attributeName="opacity" values="0.12;0.25;0.12" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="740" cy="190" r="110" fill="#7928ca" filter="url(#deep-blur)">
+    <animate attributeName="opacity" values="0.15;0.30;0.15" dur="7s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="430" cy="40" r="80" fill="#06b6d4" filter="url(#deep-blur)">
+    <animate attributeName="opacity" values="0.08;0.22;0.08" dur="5s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Glowing Animated Futuristic Outer Border -->
+  <rect x="1.5" y="1.5" width="847" height="247" rx="17" fill="none" stroke="url(#cyber-border)" stroke-width="2" opacity="0.85" />
+
+  <!-- Animated Laser Scanning Beam -->
+  <g opacity="0.6">
+    <rect x="0" y="0" width="850" height="2.5" fill="url(#laser-grad)" filter="url(#neon-glow)">
+      <animateTransform 
+        attributeName="transform" 
+        type="translate" 
+        values="0,-5; 0,250; 0,-5" 
+        dur="6s" 
+        repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Sci-Fi Corner Brackets & Circuit Accents -->
+  <!-- Top Left -->
+  <path d="M 8 28 L 8 10 L 28 10" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="34" cy="10" r="2" fill="#38bdf8" />
   
-  <!-- Subtle Grid -->
-  <rect width="850" height="240" rx="16" fill="url(#grid)" />
+  <!-- Top Right -->
+  <path d="M 822 10 L 842 10 L 842 28" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="816" cy="10" r="2" fill="#38bdf8" />
 
-  <!-- Ambient Light / Ambient Glows -->
-  <circle cx="100" cy="50" r="90" fill="#0284c7" opacity="0.18" filter="url(#glow)" />
-  <circle cx="750" cy="180" r="110" fill="#6366f1" opacity="0.15" filter="url(#glow)" />
-  <circle cx="450" cy="30" r="70" fill="#0d9488" opacity="0.12" filter="url(#glow)" />
+  <!-- Bottom Left -->
+  <path d="M 8 222 L 8 240 L 28 240" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="34" cy="240" r="2" fill="#a855f7" />
 
-  <!-- Top Accent Bar -->
-  <rect x="0" y="0" width="850" height="3.5" rx="1.5" fill="url(#azure-glow)" />
+  <!-- Bottom Right -->
+  <path d="M 822 240 L 842 240 L 842 222" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="816" cy="240" r="2" fill="#a855f7" />
 
-  <!-- Content Layout Left Column -->
-  <g transform="translate(42, 38)">
-    <!-- Terminal-like status pill -->
-    <rect x="0" y="0" width="220" height="24" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1" />
-    <circle cx="12" cy="12" r="4.5" fill="#10b981" />
-    <text x="24" y="15.5" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#94a3b8">
-      STATUS: <tspan fill="#34d399">ACTIVE &amp; BUILDING</tspan>
-    </text>
+  <!-- Animated Horizontal Circuit Data Line -->
+  <line x1="28" y1="36" x2="600" y2="36" stroke="#1e293b" stroke-width="1.2" stroke-dasharray="6,4" />
+  <line x1="28" y1="36" x2="600" y2="36" stroke="#00f2fe" stroke-width="1.2" stroke-dasharray="12,30" opacity="0.8">
+    <animate attributeName="stroke-dashoffset" values="0;-100" dur="4s" repeatCount="indefinite" />
+  </line>
 
-    <!-- Main Title -->
-    <text x="0" y="62" class="name-text">SHEKHAR</text>
-    
-    <!-- Subtitle / Role -->
-    <text x="0" y="88" class="role-text">DevOps &amp; Cloud Infrastructure Engineer</text>
-    
-    <!-- Experience & Philosophy -->
-    <text x="0" y="112" class="desc-text">3.5+ Years Experience • Architecting Resilient Azure Cloud Platforms,</text>
-    <text x="0" y="130" class="desc-text">Enterprise Landing Zones, Production DevSecOps &amp; IaC Automation.</text>
+  <!-- Left Content Column -->
+  <g transform="translate(42, 44)">
 
-    <!-- Tech Badges Pill Row -->
-    <g transform="translate(0, 146)">
-      <!-- Badge 1: Azure & CAF -->
+    <!-- Futuristic Status HUD Tag -->
+    <g transform="translate(0, 0)">
+      <!-- Outer HUD Pill -->
+      <rect x="0" y="0" width="245" height="24" rx="12" fill="#08101e" stroke="#1e3a5f" stroke-width="1" />
+      
+      <!-- Pulsing Radar Ping Animation -->
+      <circle cx="15" cy="12" r="4" fill="#00f2fe">
+        <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="15" cy="12" r="4" fill="none" stroke="#00f2fe" stroke-width="1.5">
+        <animate attributeName="r" values="4;10" dur="1.8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="1;0" dur="1.8s" repeatCount="indefinite" />
+      </circle>
+
+      <text x="28" y="15.5" class="hud-title">SYSTEM // ONLINE : ENTERPRISE</text>
+    </g>
+
+    <!-- Main Futuristic Name with Shimmer & Glow -->
+    <g transform="translate(0, 64)">
+      <text x="0" y="0" class="futuristic-name">SHEKHAR</text>
+      <!-- Sub-dot accent -->
+      <circle cx="215" cy="-8" r="4" fill="#00f2fe" filter="url(#neon-glow)">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+      </circle>
+    </g>
+
+    <!-- Role with Glowing Neon Underline -->
+    <g transform="translate(0, 92)">
+      <text x="0" y="0" class="role-text">DevOps &amp; Cloud Infrastructure Engineer</text>
+      <line x1="0" y1="7" x2="330" y2="7" stroke="url(#cyber-border)" stroke-width="1.5" stroke-linecap="round">
+        <animate attributeName="stroke-dasharray" values="100,20; 250,5; 100,20" dur="5s" repeatCount="indefinite" />
+      </line>
+    </g>
+
+    <!-- Subtitle Details -->
+    <text x="0" y="118" class="desc-text">3.5+ Years Experience • Architecting Resilient Azure Cloud Platforms,</text>
+    <text x="0" y="136" class="desc-text">Enterprise Landing Zones, Production DevSecOps &amp; IaC Automation.</text>
+
+    <!-- Tech Badges with Micro-Floating Animation & Neon Accents -->
+    <g transform="translate(0, 154)">
+      <!-- Badge 1: Azure CAF -->
       <g transform="translate(0, 0)">
-        <rect width="130" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
-        <circle cx="14" cy="13" r="3.5" fill="#0078D4" />
-        <text x="25" y="16.5" class="badge-text">Azure CAF &amp; LZ</text>
+        <rect width="134" height="27" rx="13.5" fill="#0a1224" stroke="#0078d4" stroke-width="1.2" opacity="0.95" />
+        <circle cx="14" cy="13.5" r="3.5" fill="#0078d4">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.2s" repeatCount="indefinite" />
+        </circle>
+        <text x="25" y="17" class="badge-text">Azure CAF &amp; LZ</text>
       </g>
 
       <!-- Badge 2: Terraform -->
-      <g transform="translate(138, 0)">
-        <rect width="132" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
-        <circle cx="14" cy="13" r="3.5" fill="#844fba" />
-        <text x="25" y="16.5" class="badge-text">Terraform / IaC</text>
+      <g transform="translate(142, 0)">
+        <rect width="134" height="27" rx="13.5" fill="#0e1026" stroke="#844fba" stroke-width="1.2" opacity="0.95" />
+        <circle cx="14" cy="13.5" r="3.5" fill="#a855f7">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2.8s" repeatCount="indefinite" />
+        </circle>
+        <text x="25" y="17" class="badge-text">Terraform / IaC</text>
       </g>
 
       <!-- Badge 3: DevSecOps -->
-      <g transform="translate(278, 0)">
-        <rect width="136" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
-        <circle cx="14" cy="13" r="3.5" fill="#10b981" />
-        <text x="25" y="16.5" class="badge-text">DevSecOps &amp; CI/CD</text>
+      <g transform="translate(284, 0)">
+        <rect width="138" height="27" rx="13.5" fill="#09181c" stroke="#00f2fe" stroke-width="1.2" opacity="0.95" />
+        <circle cx="14" cy="13.5" r="3.5" fill="#00f2fe">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <text x="25" y="17" class="badge-text">DevSecOps &amp; CI/CD</text>
       </g>
 
       <!-- Badge 4: Kubernetes -->
-      <g transform="translate(422, 0)">
-        <rect width="118" height="26" rx="13" fill="#1e293b" fill-opacity="0.8" stroke="url(#badge-border)" stroke-width="1" />
-        <circle cx="14" cy="13" r="3.5" fill="#326ce5" />
-        <text x="25" y="16.5" class="badge-text">Kubernetes AKS</text>
+      <g transform="translate(430, 0)">
+        <rect width="124" height="27" rx="13.5" fill="#08142a" stroke="#38bdf8" stroke-width="1.2" opacity="0.95" />
+        <circle cx="14" cy="13.5" r="3.5" fill="#38bdf8">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <text x="25" y="17" class="badge-text">Kubernetes AKS</text>
       </g>
     </g>
+
   </g>
 
-  <!-- Right Highlight Stat Cards -->
-  <g transform="translate(630, 36)">
-    <!-- Metric Card 1 -->
-    <rect x="0" y="0" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
-    <text x="14" y="24" class="metric-title">3.5+ Years</text>
-    <text x="14" y="38" class="metric-sub">DevOps Engineering</text>
+  <!-- Right HUD Telemetry Cards with Sci-Fi Borders -->
+  <g transform="translate(638, 42)">
+    
+    <!-- HUD Card 1 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="170" height="50" rx="9" fill="#090f1d" stroke="#1e2d4a" stroke-width="1.2" />
+      <!-- Cyber Accent Corner -->
+      <path d="M 0 12 L 0 0 L 12 0" fill="none" stroke="#00f2fe" stroke-width="2" />
+      <path d="M 170 38 L 170 50 L 158 50" fill="none" stroke="#00f2fe" stroke-width="2" />
+      
+      <circle cx="152" cy="15" r="3" fill="#00f2fe">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+      </circle>
 
-    <!-- Metric Card 2 -->
-    <rect x="0" y="56" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
-    <text x="14" y="80" class="metric-title">100+ Workloads</text>
-    <text x="14" y="94" class="metric-sub">Migration &amp; Automation</text>
+      <text x="14" y="24" class="metric-value">3.5+ Years</text>
+      <text x="14" y="40" class="metric-label">[ PRODUCTION EXP ]</text>
+    </g>
 
-    <!-- Metric Card 3 -->
-    <rect x="0" y="112" width="175" height="48" rx="8" fill="#111827" fill-opacity="0.75" stroke="#1f2937" stroke-width="1" />
-    <text x="14" y="136" class="metric-title">Zero-Trust</text>
-    <text x="14" y="150" class="metric-sub">Security &amp; Governance</text>
+    <!-- HUD Card 2 -->
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="170" height="50" rx="9" fill="#090f1d" stroke="#1e2d4a" stroke-width="1.2" />
+      <!-- Cyber Accent Corner -->
+      <path d="M 0 12 L 0 0 L 12 0" fill="none" stroke="#818cf8" stroke-width="2" />
+      <path d="M 170 38 L 170 50 L 158 50" fill="none" stroke="#818cf8" stroke-width="2" />
+      
+      <circle cx="152" cy="15" r="3" fill="#818cf8">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" />
+      </circle>
+
+      <text x="14" y="24" class="metric-value">100+ Workloads</text>
+      <text x="14" y="40" class="metric-label">[ MIGRATED &amp; GOVERNED ]</text>
+    </g>
+
+    <!-- HUD Card 3 -->
+    <g transform="translate(0, 120)">
+      <rect x="0" y="0" width="170" height="50" rx="9" fill="#090f1d" stroke="#1e2d4a" stroke-width="1.2" />
+      <!-- Cyber Accent Corner -->
+      <path d="M 0 12 L 0 0 L 12 0" fill="none" stroke="#c084fc" stroke-width="2" />
+      <path d="M 170 38 L 170 50 L 158 50" fill="none" stroke="#c084fc" stroke-width="2" />
+      
+      <circle cx="152" cy="15" r="3" fill="#c084fc">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.7s" repeatCount="indefinite" />
+      </circle>
+
+      <text x="14" y="24" class="metric-value">Zero-Trust</text>
+      <text x="14" y="40" class="metric-label">[ ARCHITECTURE &amp; SEC ]</text>
+    </g>
+
   </g>
 </svg>
