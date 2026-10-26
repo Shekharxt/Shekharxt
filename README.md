@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Shekharxt/Shekharxt/main/assets/banner.svg" alt="Shekhar | DevOps & Cloud Infrastructure Engineer" width="100%">
+  <img src="https://raw.githubusercontent.com/Shekharxt/Shekharxt/main/assets/header.svg" alt="Shekhar | DevOps & Cloud Infrastructure Engineer" width="100%">
 </p>
 
 <p align="center">
