@@ -39,22 +39,20 @@ graph TD
 Centralized inspection, controlled egress, and zero-trust perimeter design:
 
 ```mermaid
-flowchart LR
-    OnPrem["On-Premises Datacenter"] -->|ExpressRoute / VPN| Hub["Hub VNet (Central Connectivity)"]
-    
-    subgraph Hub["Hub VNet (/20 CIDR)"]
-        FW["Azure Firewall / NVA<br/>(Controlled Egress & UDR)"]
-        Gateway["VPN / ER Gateway"]
-        DNS["Private DNS Resolver Zones"]
+flowchart TD
+    OnPrem["🏢 On-Premises Datacenter"] -->|ExpressRoute / S2S VPN| GW["VPN / ER Gateway"]
+
+    subgraph HubVNet ["🔷 Hub Virtual Network (/20 CIDR)"]
+        GW --> FW["🔥 Azure Firewall / NVA<br/>(Centralized Inspection & UDR)"]
+        FW --> DNS["🌐 Private DNS Resolver Zones"]
     end
 
-    Hub <-->|VNet Peering (Non-transitive)| Spoke1["Spoke: App Dev / UAT"]
-    Hub <-->|VNet Peering (Non-transitive)| Spoke2["Spoke: App Production"]
+    FW <-->|VNet Peering| SpokeDev["💻 Spoke: Non-Prod (Dev / UAT)"]
+    FW <-->|VNet Peering| SpokeProd["🚀 Spoke: Production Workloads"]
 
-    subgraph Spoke2["Spoke: Production Application"]
-        App["AKS / App Services"]
-        PE["Private Endpoints"]
-        App --> PE
+    subgraph SpokeProdApp ["📦 Production Workload Environment"]
+        SpokeProd --> AKS["☸️ AKS Cluster / Microservices"]
+        AKS --> PE["🔒 Private Endpoints<br/>(Key Vault, SQL DB, Storage)"]
     end
 ```
 
