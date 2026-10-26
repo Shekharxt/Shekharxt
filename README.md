@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/banner.svg" alt="Shekhar | DevOps & Cloud Infrastructure Engineer" width="100%">
+  <img src="https://raw.githubusercontent.com/Shekharxt/Shekharxt/main/assets/banner.svg" alt="Shekhar | DevOps & Cloud Infrastructure Engineer" width="100%">
 </p>
 
 <p align="center">
@@ -33,10 +33,10 @@ Explore production-tested engineering blueprints documented directly inside this
 
 | Blueprint | Key Focus Areas | Architecture Link |
 | :--- | :--- | :--- |
-| **🏢 Azure Enterprise Landing Zone** | Management Groups, Hub-Spoke, Centralized Egress, Azure Firewall, UDRs, Private Endpoints, RBAC & Azure Policy Initiatives. | [View Blueprint](./architecture-blueprints/01-azure-enterprise-landing-zone.md) |
-| **🛡️ DevSecOps CI/CD Standards** | Trunk-Based Branching, Reusable YAML Templates, Secret Scanning (Gitleaks), Infracost, SAST, Automated Rollbacks & Drift Detection. | [View Blueprint](./architecture-blueprints/02-devsecops-pipeline-standard.md) |
-| **💰 FinOps & Waste Elimination** | Resource Rightsizing, Orphaned Disk Automation, Scheduled Start/Stop Runbooks, Log Analytics Ingestion Tuning, Reserved Instances. | [View Blueprint](./architecture-blueprints/03-finops-and-cost-optimization.md) |
-| **🚀 100+ App Cloud Migration Playbook** | 6Rs Wave Planning, On-Premises CIDR Assessment, Pre/Cutover/Hypercare Checklists, Azure Site Recovery, Minimal Downtime. | [View Blueprint](./architecture-blueprints/04-cloud-migration-framework.md) |
+| **🏢 Azure Enterprise Landing Zone** | Management Groups, Hub-Spoke, Centralized Egress, Azure Firewall, UDRs, Private Endpoints, RBAC & Azure Policy Initiatives. | [View Blueprint](https://github.com/Shekharxt/Shekharxt/blob/main/architecture-blueprints/01-azure-enterprise-landing-zone.md) |
+| **🛡️ DevSecOps CI/CD Standards** | Trunk-Based Branching, Reusable YAML Templates, Secret Scanning (Gitleaks), Infracost, SAST, Automated Rollbacks & Drift Detection. | [View Blueprint](https://github.com/Shekharxt/Shekharxt/blob/main/architecture-blueprints/02-devsecops-pipeline-standard.md) |
+| **💰 FinOps & Waste Elimination** | Resource Rightsizing, Orphaned Disk Automation, Scheduled Start/Stop Runbooks, Log Analytics Ingestion Tuning, Reserved Instances. | [View Blueprint](https://github.com/Shekharxt/Shekharxt/blob/main/architecture-blueprints/03-finops-and-cost-optimization.md) |
+| **🚀 100+ App Cloud Migration Playbook** | 6Rs Wave Planning, On-Premises CIDR Assessment, Pre/Cutover/Hypercare Checklists, Azure Site Recovery, Minimal Downtime. | [View Blueprint](https://github.com/Shekharxt/Shekharxt/blob/main/architecture-blueprints/04-cloud-migration-framework.md) |
 
 ---
 
